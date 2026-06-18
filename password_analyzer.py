@@ -39,6 +39,11 @@ def analyze_password_strength(password):
         strength -= 2
         feedback.append("Avoid common patterns like '123', 'abc', or 'password'.")
 
+    # Criteria 3.5: Repeated characters
+    if re.search(r'(.)\1{2,}', password):
+        strength -= 2
+        feedback.append("Avoid repeated characters (e.g., 'aaa', '111').")
+
     # Criteria 4: Dictionary word detection (using NLTK WordNet)
     is_dictionary_word = False
     for word in password.split():
